@@ -3,8 +3,11 @@ package com.ipathsaid.smack.Controller
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.ipathsaid.smack.R
+import com.ipathsaid.smack.Services.AuthService
 import kotlinx.android.synthetic.main.activity_create_user.*
 import java.util.*
 
@@ -34,8 +37,15 @@ class CreateUserActivity : AppCompatActivity() {
 
     }
 
-    fun createUserClicked(view: View){
-
+    fun createUserBtnClicked(view: View){
+        AuthService.registerUser(this, "j@j.com", "123456"){ complete ->
+            if(complete){
+                Toast.makeText(this, "User created", Toast.LENGTH_LONG).show()
+                Log.i("Create user clicked", "user created")
+            }else {
+                Log.i("Create user clicked", "Can't create user")
+            }
+        }
     }
 
     fun generateColorClicked(view: View){
